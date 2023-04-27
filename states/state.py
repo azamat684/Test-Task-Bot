@@ -5,6 +5,7 @@ class ProductState(StatesGroup):
     products_amount = State()
     products_contact = State()
     products_confirm = State()
+    check_start = State()
 
 
 class Reklama(StatesGroup):
@@ -14,3 +15,9 @@ class taklif_user(StatesGroup):
     taklif_ismi = State()
     taklif_start = State()
     taklif_end = State()
+    
+    
+class add_maxsulot(StatesGroup):
+    maxsulot_nomi = State()
+    maxsulot_turi = State()
+    maxsulot_miqdori = State()

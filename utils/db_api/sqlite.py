@@ -38,6 +38,18 @@ class Database:
 """
         self.execute(sql, commit=True)
         
+    def create_table_products(self):
+        sql = """
+        CREATE TABLE Products (
+            id INTEGER PRIMARY KEY,
+            product_name TEXT NOT NULL,
+            product_type VARCHAR(100) NOT NULL,
+            product_count INTEGER NOT NULL
+        );
+        """
+        self.execute(sql, commit=True)
+        
+        
     @staticmethod
     def format_args(sql, parameters: dict):
         sql += " AND ".join([
@@ -52,10 +64,22 @@ class Database:
         INSERT INTO Users(id, Name, language) VALUES(?, ?, ?)
         """
         self.execute(sql, parameters=(id, name,language), commit=True)
+        
+    def add_product(self, product_name, product_type, product_count):
+        sql = """
+        INSERT INTO Products(product_name, product_type, product_count) VALUES(?, ?, ?)
+        """
+        self.execute(sql, parameters=(product_name, product_type, product_count, ), commit=True)
 
     def select_all_users(self):
         sql = """
         SELECT * FROM Users
+        """
+        return self.execute(sql, fetchall=True)
+    
+    def select_all_products(self):
+        sql = """
+        SELECT * FROM Products
         """
         return self.execute(sql, fetchall=True)
 
